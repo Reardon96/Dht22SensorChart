@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="Wpf.CartesianChart.DateAxis.DateAxisExample"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="CleanSeparator" TargetType="lvc:Separator">
+                <Setter Property="IsEnabled" Value="False"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="CALLUMS ROOM - DHT22 SENSOR READINGS" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Content="Last 6 hours" FontSize="16" Click="SixHours_Button"/>
+            <Button Content="Last 12 hours" FontSize="16" Click="TwelveHours_Button"/>
+            <Button Content="Last 24 hours" FontSize="16" Click="TwentyFourHours_Button"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Custom Search (Hours)" FontSize="16" Margin="0,5,10,0"/>
+            <TextBox x:Name="CustomRange_TextBox" Width="40" Text="" Margin="0,5,0,0" TextAlignment="Center" FontSize="16"/>
+            <Button Content="GO" FontSize="16" Click="CustomRangeGo_Button" Width="40" Margin="0,5,0,0"/>
+        </StackPanel>
+        <TextBlock x:Name="TimeRange" Text="TIME RANGE: 2 HOURS" Grid.Column="0" FontSize="16" Grid.Row="1" HorizontalAlignment="Center"/>
+
+        <lvc:CartesianChart Zoom="X" Grid.Row="4" DisableAnimations="True" Series="{Binding SeriesCollection}">
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Foreground="Blue" Title="Humidity (%)" Position="RightTop" FontSize="14">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Style="{StaticResource CleanSeparator}"></lvc:Separator>
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+                <lvc:Axis Foreground="Red" Title="Temperature (DegC)" Position="RightTop" FontSize="14">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Style="{StaticResource CleanSeparator}" Step="0.5"></lvc:Separator>
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Scan" FontSize="14"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+
+    </Grid>
+</UserControl>
